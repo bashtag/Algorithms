@@ -1,2 +1,2 @@
 # Algorithms
-Some algorithms I've written or learned
+Some algorithms I've written and learned
