@@ -1,4 +1,5 @@
 import string
+from typing import SupportsIndex
 
 def find_uniq(arr):
 	unique = arr[0]
@@ -87,3 +88,27 @@ def snail(array):
 		m += array[0].tolist()
 		array = np.rot90(array[1:])
 	return m
+
+class Solution:
+	def twoSum(self, nums: list[int], target: int) -> list[int]:
+		indexes = []
+		for i in nums:
+			for j in nums[nums.index(i)+1:]:
+				if i + j == target:
+					print(i,j)
+					indexes.append(nums.index(i))
+					indexes.append(nums.index(j, nums.index(i)+1))
+					return indexes
+
+	def calPoints(self, ops: list[str]) -> int:
+		record = []
+		for element in ops:
+			if element.isdigit() or element[0] == "-" and element[1:].isdigit():
+				record.append(int(element))
+			elif element == "+":
+				record.append(record[-1] + record[-2])
+			elif element == "C":
+				record = record[:-1]
+			elif element == "D":
+				record.append(record[-1]*2)
+		return sum(record)
