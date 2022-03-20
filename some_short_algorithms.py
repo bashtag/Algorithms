@@ -90,6 +90,8 @@ def snail(array):
 		array = np.rot90(array[1:])
 	return m
 
+# the sum of two terms must be equal to target
+# return this two indeces
 class Solution:
 	def twoSum(self, nums: list[int], target: int) -> list[int]:
 		indexes = []
