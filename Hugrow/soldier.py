@@ -71,6 +71,7 @@ def soldier(o_team, e_team):
 
 	return result
 
+
 if __name__ == "__main__":
 	inputs = input().split()
 	lens = []
@@ -83,3 +84,55 @@ if __name__ == "__main__":
 	result = soldier(o_team, e_team)
 
 	print(" ".join(map(str, result)), end="")
+
+
+# time limit exceeded
+def soldier_0(o_team: list[int], e_team: list[int]):
+	
+	result = []
+
+	for soldier in e_team:
+		counter = 0
+		for other in o_team:
+			if soldier > other:
+				counter += 1
+		result.append(counter)
+
+	result.sort()
+	
+	return result
+
+# if __name__ == "__main__":
+# 	inputs = input().split()
+# 	lens = []
+# 	for num in inputs:
+# 		lens.append(int(num))
+
+# 	o_str_list = input().split()
+# 	e_str_list = input().split()
+
+# 	o_team = []
+# 	for num in o_str_list:
+# 		o_team.append(int(num))
+
+# 	e_team = []
+# 	for num in e_str_list:
+# 		e_team.append(int(num))
+
+# 	result = soldier(o_team, e_team)
+
+# 	sp = "1 1 1 1 3 3".split()
+# 	new_sp = []
+# 	for num in sp:
+# 		new_sp.append(int(num))
+# 	for i in range(len(new_sp)):
+# 		if new_sp[i] == result[i]:
+# 			print(True)
+# 		else:
+# 			print("Not equal: ")
+# 			print(f"sp: {new_sp[i]}, res: {result[i]}")
+
+# 	for index in range(len(result)):
+# 		print(result[index], end="")
+# 		if index != len(result) - 1:
+# 			print(end=" ")

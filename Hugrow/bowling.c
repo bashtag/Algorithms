@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// not finished yet
 int bowling(int **xd, int x, int y, int d, int n)
 {
 	int result = 0;
