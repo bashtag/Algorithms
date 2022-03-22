@@ -281,9 +281,108 @@ int countOdds(int low, int high){
     return (counter);
 }
 
+
+// Number of 1 bits
+int hammingWeight(unsigned int n) { // u_int_32
+	int counter = 0;
+	while (n)
+	{
+		if (n % 2 == 1)
+			counter++;
+		n /= 2;
+	}
+	return (counter);
+}
+
+// faster code than previous code
+int faster_hammingWeight(unsigned int n) { // u_int_32
+    int w = 0;
+    while(n != 0) {
+        w += n & 0b1;
+        n >>= 1;
+    }
+    return w;
+}
+
+
+int subtractProductAndSum(int n){
+	// char *number = (char *)calloc(7, sizeof(char));
+	// sprintf(number, "%d", n);
+	int total = 0;
+	int product = 1;
+
+	while (n)
+	{
+		total += n % 10;
+		product *= n % 10;
+		n /= 10;
+	}
+	return (product - total);
+}
+
+
+
+// It worked. But it was slow
+void insertionSort(int *nums, int numsSize)
+{
+	int key, j;
+
+	for (int i = 1; i < numsSize; i++)
+	{
+		key = nums[i];
+		j = i - 1;
+
+		while (j >= 0 && nums[j] > key)
+		{
+			nums[j + 1] = nums[j];
+			j--;
+		}
+		nums[j + 1] = key;
+	}
+}
+
+int largestPerimeter(int* nums, int numsSize){
+	insertionSort(nums, numsSize);
+	
+	for (int i = numsSize - 3; i >= 0; i--)
+	{
+		if (nums[i] + nums[i + 1] > nums[i + 2])
+			return (nums[i] + nums[i + 1] + nums[i + 2]);
+	}
+	return (0);
+}
+
+
+// quickSort is very fast for big arrays.
+bool comp(void*a, void*b){
+    return *(int*)a > *(int*)b;
+}
+
+int fastest_largestPerimeter(int* nums, int numsSize){
+    qsort(nums, numsSize, sizeof(int), comp);
+    for(int i = numsSize-3; i>=0; i--){
+        if(nums[i]+nums[i+1]>nums[i+2]){
+            return nums[i]+nums[i+1]+nums[i+2];
+        }
+    }
+    return 0;
+}
+
 int main(void)
 {
-	printf("%d\n", countOdds(21, 22));
+
+	// // largest perimeter
+	// int nums[10] = {2,2,1};
+	// printf("%d\n", fastest_largestPerimeter(nums,3));
+
+	// // subtraction between product and sum of number
+	// printf("%d\n", subtractProductAndSum(253));
+
+	// // main of number of 1 bits
+	//printf("%d\n", hammingWeight(2));
+
+	// // main of countOdds
+	// printf("%d\n", countOdds(21, 22));
 
 	// // main of sumOfDivided;
 	// int d1[10] = {15, 30, -45};

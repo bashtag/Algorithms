@@ -1,8 +1,6 @@
-package myAlgorithms;
+public class some_algos_in_Java {
 
-public class main {
-
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		Solution solution = new Solution();
@@ -11,7 +9,4 @@ public class main {
 		for (int i = 0; i < ques.length; i++)
 			System.out.println(ques[i]);
 	}
-
 }
-
-
