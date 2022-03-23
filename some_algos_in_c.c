@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 // the sum of two terms must be equal to target
 // return this two indeces
@@ -198,8 +199,7 @@ int romanToInt(char *s)
 
 // }
 
-
-// sumOfDivided codewars problem. 
+// sumOfDivided codewars problem.
 int nextPrime(int prime)
 {
 	bool isPrime = true;
@@ -223,8 +223,8 @@ void create_sum(char *result, int prime, int term)
 {
 	char *p_buff = (char *)calloc(25, sizeof(char));
 	char *t_buff = (char *)calloc(25, sizeof(char));
-	sprintf(p_buff,"%d",prime);
-	sprintf(t_buff,"%d",term);
+	sprintf(p_buff, "%d", prime);
+	sprintf(t_buff, "%d", term);
 	strcat(result, "(");
 	strcat(result, p_buff);
 	strcat(result, " ");
@@ -264,26 +264,31 @@ char *sumOfDivided(int *lst, int l)
 }
 
 // odd counter in this range
-int countOdds(int low, int high){
-    bool isHighOdd = false;
-    bool isLowOdd = false;
-    int counter = 0;
-    
-    if (high % 2 == 1) isHighOdd = true;
-    if (low % 2 == 1)
-    {
-        isLowOdd = true;
-        counter++;
-    }
-    if ((high - low) % 2 == 0) counter += (high - low) / 2;
-    else if (isHighOdd) counter += (high - low + 1) / 2;
-    else counter += (high - low - 1) / 2;
-    return (counter);
+int countOdds(int low, int high)
+{
+	bool isHighOdd = false;
+	bool isLowOdd = false;
+	int counter = 0;
+
+	if (high % 2 == 1)
+		isHighOdd = true;
+	if (low % 2 == 1)
+	{
+		isLowOdd = true;
+		counter++;
+	}
+	if ((high - low) % 2 == 0)
+		counter += (high - low) / 2;
+	else if (isHighOdd)
+		counter += (high - low + 1) / 2;
+	else
+		counter += (high - low - 1) / 2;
+	return (counter);
 }
 
-
 // Number of 1 bits
-int hammingWeight(unsigned int n) { // u_int_32
+int hammingWeight(unsigned int n)
+{ // u_int_32
 	int counter = 0;
 	while (n)
 	{
@@ -294,18 +299,20 @@ int hammingWeight(unsigned int n) { // u_int_32
 	return (counter);
 }
 
-// faster code than previous code
-int faster_hammingWeight(unsigned int n) { // u_int_32
-    int w = 0;
-    while(n != 0) {
-        w += n & 0b1;
-        n >>= 1;
-    }
-    return w;
+// faster code than previous
+int faster_hammingWeight(unsigned int n)
+{ // u_int_32
+	int w = 0;
+	while (n != 0)
+	{
+		w += n & 0b1;
+		n >>= 1;
+	}
+	return w;
 }
 
-
-int subtractProductAndSum(int n){
+int subtractProductAndSum(int n)
+{
 	// char *number = (char *)calloc(7, sizeof(char));
 	// sprintf(number, "%d", n);
 	int total = 0;
@@ -319,8 +326,6 @@ int subtractProductAndSum(int n){
 	}
 	return (product - total);
 }
-
-
 
 // It worked. But it was slow
 void insertionSort(int *nums, int numsSize)
@@ -341,9 +346,10 @@ void insertionSort(int *nums, int numsSize)
 	}
 }
 
-int largestPerimeter(int* nums, int numsSize){
+int largestPerimeter(int *nums, int numsSize)
+{
 	insertionSort(nums, numsSize);
-	
+
 	for (int i = numsSize - 3; i >= 0; i--)
 	{
 		if (nums[i] + nums[i + 1] > nums[i + 2])
@@ -352,24 +358,65 @@ int largestPerimeter(int* nums, int numsSize){
 	return (0);
 }
 
-
-// quickSort is very fast for big arrays.
-bool comp(void*a, void*b){
-    return *(int*)a > *(int*)b;
+// quickSort is very fast for big arrays that contains too many terms.
+int comp(const void *a, const void *b)
+{
+	const int *i = a;
+	const int *j = b;
+	return *i - *j;
 }
 
-int fastest_largestPerimeter(int* nums, int numsSize){
-    qsort(nums, numsSize, sizeof(int), comp);
-    for(int i = numsSize-3; i>=0; i--){
-        if(nums[i]+nums[i+1]>nums[i+2]){
-            return nums[i]+nums[i+1]+nums[i+2];
-        }
-    }
-    return 0;
+int fastest_largestPerimeter(int *nums, int numsSize)
+{
+	qsort(nums, numsSize, sizeof(int), comp);
+	for (int i = numsSize - 3; i >= 0; i--)
+	{
+		if (nums[i] + nums[i + 1] > nums[i + 2])
+		{
+			return nums[i] + nums[i + 1] + nums[i + 2];
+		}
+	}
+	return 0;
+}
+
+
+// the smallest manhatten distance from current location
+
+int nearestValidPoint(int x, int y, int **points, int pointsSize, int *pointsColSize)
+{
+	int result = 0xffffffff / 2;
+	int count, index = 0;
+	bool is_there = false;
+
+	for (int i = 0; i < pointsSize; i++)
+	{
+		if (points[i][0] == x || points[i][1] == y)
+		{
+			is_there = true;
+			count = abs(x - points[i][0]) + abs(y - points[i][1]);
+			if (result > count)
+			{
+				result = count;
+				index = i;
+			}
+		}
+	}
+	if (!is_there) return (-1);
+	return (index);
 }
 
 int main(void)
 {
+
+
+	// // main of nearest valid point
+	// int arr[5][2] = {{1, 2}, {3, 1}, {2, 4}, {2, 3}, {4, 4}};
+	// int *size;
+	// printf("%d\n", nearestValidPoint(3, 4, arr, 5, size));
+
+	// enum bilal {nevsehir=50, nigde='9' + 1, tokat, ankara = nevsehir, istanbul};
+	// enum bilal city = 50;
+	// printf("%s\n", city);
 
 	// // largest perimeter
 	// int nums[10] = {2,2,1};
@@ -379,7 +426,7 @@ int main(void)
 	// printf("%d\n", subtractProductAndSum(253));
 
 	// // main of number of 1 bits
-	//printf("%d\n", hammingWeight(2));
+	// printf("%d\n", hammingWeight(2));
 
 	// // main of countOdds
 	// printf("%d\n", countOdds(21, 22));
