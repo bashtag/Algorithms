@@ -379,7 +379,6 @@ int fastest_largestPerimeter(int *nums, int numsSize)
 	return 0;
 }
 
-
 // the smallest manhatten distance from current location
 
 int nearestValidPoint(int x, int y, int **points, int pointsSize, int *pointsColSize)
@@ -401,13 +400,125 @@ int nearestValidPoint(int x, int y, int **points, int pointsSize, int *pointsCol
 			}
 		}
 	}
-	if (!is_there) return (-1);
+	if (!is_there)
+		return (-1);
 	return (index);
+}
+
+// result of product of all numbers in nums array is pozitive or negative
+int arraySign(int *nums, int numsSize)
+{
+	int count = 0;
+	for (int i = 0; i < numsSize; i++)
+	{
+		if (nums[i] == 0)
+		{
+			return 0;
+		}
+		count += (nums[i] >> 31);
+	}
+
+	return (count % 2 == 0) ? 1 : -1;
+}
+
+// Is array consecutive?
+int cmpfunc(const void *a, const void *b)
+{
+	return *(int *)a - *(int *)b;
+}
+
+bool canMakeArithmeticProgression(int *arr, int arrSize)
+{
+	qsort(arr, arrSize, sizeof(int), cmpfunc);
+	int diff = arr[1] - arr[0];
+	for (int i = 0; i < arrSize - 1; i++)
+	{
+		if (arr[i] + diff != arr[i + 1])
+			return false;
+	}
+	return true;
+}
+
+// Happy Number
+// 19 --> 1^2 + 9^2 = 82
+// 8^2 + 2^2 --> 68
+// 6^2 + 8^2 --> 100
+// 1^2 + 0^2 + 0^2 --> 1 --> Happy Number!
+// that is a endless loop algorithm
+bool isHappy(int n)
+{
+	char *num = (char *)calloc(11, sizeof(int));
+
+	while (n >= 10)
+	{
+		sprintf(num, "%d", n);
+		n = 0;
+		for (int i = 0; i < strlen(num); i++)
+			n += (num[i] - 48) * (num[i] - 48);
+	}
+	if (n == 1 || n == 7)
+		return (true);
+	else
+		return (false);
+}
+
+// Check if One Char Swap Can Make Strings Equal
+bool comp(const void *a, const void *b)
+{
+	return *(char *)a > *(char *)b;
+}
+
+bool areAlmostEqual(char *s1, char *s2)
+{
+	int counter = 0;
+	for (int i = 0; i < strlen(s1); i++)
+	{
+		if (s1[i] != s2[i])
+			counter++;
+		if (counter > 2)
+			return (false);
+	}
+	qsort(s1, strlen(s1), sizeof(char), comp);
+	qsort(s2, strlen(s1), sizeof(char), comp);
+	if (strcmp(s1, s2) != 0)
+		return (false);
+	if (counter == 0 || counter == 2)
+		return (true);
+	return (false);
+}
+
+// faster code than above
+bool areAlmostEqual(char *s1, char *s2)
+{
+
+	int low = 0;
+	int high = 0;
+	int count = 0;
+
+	for (int i = 0; i < strlen(s1); i++)
+	{
+		int subst = s1[i] - s2[i];
+		if (subst != 0)
+		{
+			if (count > 2)
+				return false;
+			else if (count == 1)
+				high = i;
+			else
+				low = i;
+
+			count++;
+		}
+	}
+
+	if (count == 0)
+		return true;
+	else
+		return (s1[low] == s2[high]) && (s1[high] == s2[low]);
 }
 
 int main(void)
 {
-
 
 	// // main of nearest valid point
 	// int arr[5][2] = {{1, 2}, {3, 1}, {2, 4}, {2, 3}, {4, 4}};
