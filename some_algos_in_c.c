@@ -463,9 +463,9 @@ bool isHappy(int n)
 }
 
 // Check if One Char Swap Can Make Strings Equal
-bool comp(const void *a, const void *b)
+int compare(const void *a, const void *b)
 {
-	return *(char *)a > *(char *)b;
+	return *(char *)a - *(char *)b;
 }
 
 bool areAlmostEqual(char *s1, char *s2)
@@ -478,8 +478,8 @@ bool areAlmostEqual(char *s1, char *s2)
 		if (counter > 2)
 			return (false);
 	}
-	qsort(s1, strlen(s1), sizeof(char), comp);
-	qsort(s2, strlen(s1), sizeof(char), comp);
+	qsort(s1, strlen(s1), sizeof(char), compare);
+	qsort(s2, strlen(s1), sizeof(char), compare);
 	if (strcmp(s1, s2) != 0)
 		return (false);
 	if (counter == 0 || counter == 2)
@@ -488,37 +488,124 @@ bool areAlmostEqual(char *s1, char *s2)
 }
 
 // faster code than above
-bool areAlmostEqual(char *s1, char *s2)
+// bool areAlmostEqual(char *s1, char *s2)
+// {
+
+// 	int low = 0;
+// 	int high = 0;
+// 	int count = 0;
+
+// 	for (int i = 0; i < strlen(s1); i++)
+// 	{
+// 		int subst = s1[i] - s2[i];
+// 		if (subst != 0)
+// 		{
+// 			if (count > 2)
+// 				return false;
+// 			else if (count == 1)
+// 				high = i;
+// 			else
+// 				low = i;
+
+// 			count++;
+// 		}
+// 	}
+
+// 	if (count == 0)
+// 		return true;
+// 	else
+// 		return (s1[low] == s2[high]) && (s1[high] == s2[low]);
+// }
+
+void	count_gpa(double arr[3])
 {
+	for (int i = 0; i < 4; i++)
+		printf("%lf\n", arr[i]);
+}
 
-	int low = 0;
-	int high = 0;
-	int count = 0;
+void	nconcat(char *s1, const char *s2, int n)
+{
+	int i, n1, n2;
 
-	for (int i = 0; i < strlen(s1); i++)
-	{
-		int subst = s1[i] - s2[i];
-		if (subst != 0)
-		{
-			if (count > 2)
-				return false;
-			else if (count == 1)
-				high = i;
-			else
-				low = i;
+	n1 = strlen(s1);
+	n2 = strlen(s2);
 
-			count++;
-		}
-	}
+	if (n > n2) n = n2;
 
-	if (count == 0)
-		return true;
-	else
-		return (s1[low] == s2[high]) && (s1[high] == s2[low]);
+	s1 = &s1[n1];
+
+	for (i = 0; i < n; i++)
+		s1[i] = s2[i];
+
+	s1[i] = '\0';
+
+	s1 = &s1[-n1];
+}
+
+double	get_a_valid_f_number()
+{
+	double	db_num = -1.0;
+	// int	number = 0;
+	// char	buff;
+
+	// do {
+	// 	buff = getchar();
+
+	// 	if (buff != '\n')
+	// 	{
+	// 		number *= 10; /* base 10 */
+	// 		number += buff - '0'; /* adding a digit */
+	// 	}
+	// } while (buff != '\n' && buff >= '0' && buff <= '9');
+
+	// if (number == 0 || buff != '\n')
+	// {
+	// 	flush();
+	// 	return (-1);
+	// }
+	// else
+	// 	return (number);
+
+	scanf("%lf", &db_num);
+
+	fflush(stdin);
+
+	return (db_num);
 }
 
 int main(void)
 {
+	//nconcat(str1, str2, 3);
+
+	//printf(str1);
+
+	// 520
+	// double array[3] = {9.0,2.1, 3.1};
+	// count_gpa(&array[0]);
+
+	// FILE *fp;
+	// int len;
+	// char id[12];
+	// int passw;
+
+	// fp = fopen("attempt.txt", "r");
+	// if (fp == NULL)
+	// {
+	// 	perror("Error opening file");
+	// 	return (-1);
+	// }
+	
+	// if (feof(fp))
+	// {
+	// 	fscanf(fp, "%11s", id);
+	// 	fseek(fp, 1, SEEK_CUR);
+	// 	fscanf(fp, "%d", &passw);
+	// }
+
+	// len = ftell(fp);
+	// fclose(fp);
+	// printf("%s -> passwd: %d\n", id, passw);
+	// printf("Total size of attempt.txt = %d bytes\n", len);
 
 	// // main of nearest valid point
 	// int arr[5][2] = {{1, 2}, {3, 1}, {2, 4}, {2, 3}, {4, 4}};
