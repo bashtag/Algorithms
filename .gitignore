@@ -53,3 +53,7 @@ dkms.conf
 
 # java object files
 *.class
+
+*.txt
+
+tempCodeRunnerFile.c

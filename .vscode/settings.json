@@ -2,6 +2,8 @@
     "files.associations": {
         "string.h": "c",
         "stdlib.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "*.txt": "c",
+        "random": "c"
     }
 }
