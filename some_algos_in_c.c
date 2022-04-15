@@ -573,8 +573,71 @@ double	get_a_valid_f_number()
 	return (db_num);
 }
 
+void	letterCounter(char str[], int count[])
+{
+	for (int i = 0; i < 26; i++)
+	{
+		for (int j = 0; str[j]; j++)
+		{
+			if (str[j] == i + 'A' || str[j] == i + 'a')
+				count[i] += 1;
+		}
+	}
+}
+
+
+int	readTime(int *hour, int *minute)
+{
+	char str[100];
+	int	flag = -1;
+	*hour = 0;
+	*minute = 0;
+
+	scanf("%s", str);
+
+	if ((str[0] <= '2' && str[0] >= '0') &&
+		str[1] <= '9' && str[1] >= '0'  &&
+		str[2] == ':' &&
+		str[3] <= '5' && str[3] >= '0' &&
+		str[4] <= '9' && str[4] >= '0' &&
+		str[5] == '\0')
+	{
+		flag = 0;
+		if (str[0] == '2' && str[1] > '3')
+			flag = -1;
+	}
+
+	if (flag == 0)
+	{
+		*hour = (str[0] - '0') * 10 + str[1] - '0';
+		*minute = (str[3] - '0') * 10 + str[4] - '0';
+	}
+
+	return (flag);
+}
+
+// Bilgisayar\0ve & Programlama & Dilleri\0
+// *dept => B
+
+
 int main(void)
 {
+	char	*str = "DSJKGKJDSGLKJGRDLIVNLSNRDJVNUDRSNVL";
+	int	count[26];
+
+	for (int i = 0; i < 26; i++) count[i] = 0;
+
+	letterCounter(str, count);
+
+	for (int i = 0; i < 26; i++)
+	{
+		printf("%c -> %d\n", i+'a', count[i]);
+	}
+
+	int	hour, minute;
+	printf("time -> %d\n", readTime(&hour, &minute));
+	printf("hour -> %d, minute -> %d\n", hour, minute);
+
 	//nconcat(str1, str2, 3);
 
 	//printf(str1);
