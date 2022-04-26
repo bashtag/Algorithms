@@ -616,27 +616,41 @@ int	readTime(int *hour, int *minute)
 	return (flag);
 }
 
-// Bilgisayar\0ve & Programlama & Dilleri\0
-// *dept => B
-
+char * freqAlphabets(char * s){
+    printf("strlen -> %d\n", strlen(s));
+    char *result = (char *)calloc(strlen(s) + 1, sizeof(char));
+    char letter;
+    
+    int j = 0;
+    for (int i = 0; s[i]; i++, j++)
+    {
+        letter = 0;
+        printf("i = %d, j = %d, con-> %d, %d\n", i, j, strlen(s)-2,i<(int)strlen(s)-2);
+        if (i < (int)strlen(s) - 2 && s[i + 2] == '#')
+        {
+            letter += (s[i] - 48) * 10 + (s[i + 1] - 48);
+            i += 2;
+        }
+        else
+        {
+            printf("%d\n", s[i]);
+            letter += s[i] - 48;
+        }
+        printf("alo\n");
+        result[j] = 'a' + letter - 1;
+        printf("%c\n", result[j]);
+    }
+    result[j] = '\0';
+    
+    return (result);
+}
 
 int main(void)
 {
-	char	*str = "DSJKGKJDSGLKJGRDLIVNLSNRDJVNUDRSNVL";
-	int	count[26];
 
-	for (int i = 0; i < 26; i++) count[i] = 0;
+	char s[10] = "1";
 
-	letterCounter(str, count);
-
-	for (int i = 0; i < 26; i++)
-	{
-		printf("%c -> %d\n", i+'a', count[i]);
-	}
-
-	int	hour, minute;
-	printf("time -> %d\n", readTime(&hour, &minute));
-	printf("hour -> %d, minute -> %d\n", hour, minute);
+	printf("%s\n", freqAlphabets(s));
 
 	//nconcat(str1, str2, 3);
 
