@@ -647,7 +647,7 @@ char * freqAlphabets(char * s){
 
 int main(void)
 {
-
+	// union -> dene double integer geçişlerini
 	char s[10] = "1";
 
 	printf("%s\n", freqAlphabets(s));
