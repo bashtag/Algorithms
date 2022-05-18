@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 // the sum of two terms must be equal to target
 // return this two indeces
@@ -645,12 +646,167 @@ char * freqAlphabets(char * s){
     return (result);
 }
 
+/*
+#define HASH_SIZE (1007)
+typedef struct _hash{
+    int num;
+    int pos;
+    struct _hash *next;
+}hash_t;
+
+int getKey(int key)
+{
+    return (key%HASH_SIZE+HASH_SIZE)%HASH_SIZE;
+}
+
+void addHash(hash_t **obj, int val, int pos)
+{
+    int k = getKey(val);
+    if(obj[k]==NULL)
+    {
+        hash_t *tmp = malloc(sizeof(hash_t));
+        tmp->num = val;
+        tmp->pos = pos;
+        tmp->next = NULL;
+        obj[k] = tmp;
+        return;
+    }
+    hash_t *cur = obj[k];
+    while(cur->next)
+    {
+        if(cur->num == val)
+        {
+            return;
+        }
+        else
+        {
+            cur = cur->next;
+        }
+    }
+    hash_t *tmp = malloc(sizeof(hash_t));
+    tmp->num = val;
+    tmp->pos = pos;
+    tmp->next = NULL;
+    cur->next = tmp;
+}
+
+int getHash(hash_t **obj, int val)
+{
+    int k = getKey(val);
+    hash_t *cur = obj[k];
+    while(cur)
+    {
+        if(cur->num==val)
+        {
+            return cur->pos;
+        }
+        else
+        {
+            cur = cur->next;
+        }
+    }
+    return -1;
+}
+
+int* twoSum(int* nums, int numsSize, int target, int* returnSize){
+    *returnSize = 2;
+    int *res = malloc(2*sizeof(int));
+    hash_t **obj = calloc(HASH_SIZE, sizeof(hash_t*));
+    for(int i = 0; i < numsSize; i++)
+    {
+        int pos = getHash(obj, target - nums[i]);
+        if(pos>=0)
+        {
+            res[0] = i;
+            res[1] = pos;
+            return res;
+        }
+        addHash(obj, nums[i], i);
+    }
+    return res;
+}
+*/
+
+// typedef struct
+// {
+// 	int	a;
+// 	int	b;
+// 	char	word[15];
+// } Deneme;
+
+// void	changeStruct(Deneme deneme[])
+// {
+// 	deneme[0].a = 1;
+// 	deneme[0].b = 1;
+// 	strcpy(deneme[0].word, "armut");
+// }
+
+
+
 int main(void)
 {
 	// union -> dene double integer geçişlerini
-	char s[10] = "1";
 
-	printf("%s\n", freqAlphabets(s));
+
+	// Deneme deneme[7];
+	// deneme[0].a = 5;
+	// deneme[0].b = 3;
+	// strcpy(deneme[0].word, "bilal");
+
+	// changeStruct(deneme);
+
+	// printf("%d, %d, %s\n", deneme[0].a, deneme[0].b, deneme[0].word);
+
+
+
+	// char string[50] = "kfjweofjkdsjfokjew";
+	// int	hash_map[50], chosen_word = 0;
+	// char hashMap[256];
+	// char deneme[50];
+	// int	a, b, c, i;
+
+	// gets(deneme);
+
+	// printf("%s\n", deneme);
+
+	// a = atoi(deneme);
+	// b = atoi(&deneme[2]);
+
+	// for (i = strlen(deneme) - 1; deneme[i] != ' '; i--);
+	// printf("%s\n", &deneme[i + 1]);
+
+	// srand(time(NULL));
+	// chosen_word = 1;
+	// switch (1)
+	// {
+	// case 1:
+	// 	chosen_word = 2;
+	// 	break;
+	
+	// default:
+	// 	break;
+	// }
+
+	// printf("%d\n", chosen_word);
+
+
+	// for (int i = 0; i < 50; i++)
+	// 	hash_map[i] = 0;
+
+	// while (true)
+	// {
+	// 	while (hash_map[chosen_word = rand()%50]++ != 0);
+	// 	for (int i = 0; i < 50; i++)
+	// 		printf("%d ", hash_map[i]);
+	// 	getchar();
+	// }
+
+	// for (int i = 0; string[i]; i++)
+	// {
+	// 	hashMap[string[i]]++;
+	// }
+
+	// printf("%d\n", hashMap['k']);
 
 	//nconcat(str1, str2, 3);
 
